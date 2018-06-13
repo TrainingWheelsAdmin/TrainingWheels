@@ -1,0 +1,6 @@
+C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\ServiceContracts\bin\Debug\ServiceContracts.exe.config
+C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\ServiceContracts\bin\Debug\ServiceContracts.exe
+C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\ServiceContracts\bin\Debug\ServiceContracts.pdb
+C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\ServiceContracts\obj\Debug\ServiceContracts.csprojResolveAssemblyReference.cache
+C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\ServiceContracts\obj\Debug\ServiceContracts.exe
+C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\ServiceContracts\obj\Debug\ServiceContracts.pdb

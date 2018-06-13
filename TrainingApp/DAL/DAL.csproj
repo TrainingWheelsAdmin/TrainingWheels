@@ -59,6 +59,7 @@
     <Compile Include="AdminScope.cs">
       <DependentUpon>TrainingDAL.tt</DependentUpon>
     </Compile>
+    <Compile Include="CheckAdminCredentialDAL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TenantAddress.cs">
@@ -108,6 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{4377a700-5a01-4496-972c-7b83cf8ab549}</Project>
+      <Name>IDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
