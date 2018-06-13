@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd92703a1f6e42af9a60a10941987b9a" Name="Diagram1">
+        <EntityTypeShape EntityType="TrainingWheelsAdminDbModel.AdminCredential" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrainingWheelsAdminDbModel.AdminDetail" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrainingWheelsAdminDbModel.AdminScope" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrainingWheelsAdminDbModel.TenantAddress" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrainingWheelsAdminDbModel.TenantDetail" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="TrainingWheelsAdminDbModel.FK_TenantId" ManuallyRouted="false" />
+        <AssociationConnector Association="TrainingWheelsAdminDbModel.FK_AdminDetail_AdminScopeId" ManuallyRouted="false" />
+        <AssociationConnector Association="TrainingWheelsAdminDbModel.FK_TenantAddress_TenantId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

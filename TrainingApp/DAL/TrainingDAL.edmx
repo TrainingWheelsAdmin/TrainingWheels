@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrainingWheelsAdminDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminCredentials">
+          <Key>
+            <PropertyRef Name="AdminCredentialsId" />
+          </Key>
+          <Property Name="AdminCredentialsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantId" Type="uniqueidentifier" />
+          <Property Name="UserName" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AddedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AddedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminDetails">
+          <Key>
+            <PropertyRef Name="AdminDetail_Id" />
+          </Key>
+          <Property Name="AdminDetail_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdminDetail_AdminScopeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdminDetail_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminDetail_Description" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="AdminDetail_AddedOn" Type="datetime" Nullable="false" />
+          <Property Name="AdminDetail_AddedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdminDetail_UpdatedOn" Type="datetime" />
+          <Property Name="AdminDetail_UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="AdminDetail_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminScopes">
+          <Key>
+            <PropertyRef Name="AdminScope_Id" />
+          </Key>
+          <Property Name="AdminScope_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdminScope_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminScope_Description" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="AdminScope_AddedOn" Type="datetime" Nullable="false" />
+          <Property Name="AdminScope_AddedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdminScope_UpdatedOn" Type="datetime" />
+          <Property Name="AdminScope_UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="AdminScope_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TenantAddress">
+          <Key>
+            <PropertyRef Name="TenantAddress_Id" />
+          </Key>
+          <Property Name="TenantAddress_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantAddress_TenantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantAddress_CompanyName" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="TenantAddress_DoorNo" Type="int" />
+          <Property Name="TenantAddress_StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenantAddress_CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenantAddress_CountryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenantAddress_ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenantAddress_EmailId" Type="nvarchar" MaxLength="100" />
+          <Property Name="TenantAddress_ContactPersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TenantAddress_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TenantDetails">
+          <Key>
+            <PropertyRef Name="TenantDetails_Id" />
+          </Key>
+          <Property Name="TenantDetails_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantDetails_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenantDetails_Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="TenantDetails_TenantSite" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenantDetails_TenantUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenantDetails_AddedOn" Type="datetime" Nullable="false" />
+          <Property Name="TenantDetails_AddedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenantDetails_UpdatedOn" Type="datetime" />
+          <Property Name="TenantDetails_UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="TenantDetails_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AdminDetail_AdminScopeId">
+          <End Role="AdminScopes" Type="Self.AdminScopes" Multiplicity="1" />
+          <End Role="AdminDetails" Type="Self.AdminDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminScopes">
+              <PropertyRef Name="AdminScope_Id" />
+            </Principal>
+            <Dependent Role="AdminDetails">
+              <PropertyRef Name="AdminDetail_AdminScopeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenantAddress_TenantId">
+          <End Role="TenantDetails" Type="Self.TenantDetails" Multiplicity="1" />
+          <End Role="TenantAddress" Type="Self.TenantAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantDetails">
+              <PropertyRef Name="TenantDetails_Id" />
+            </Principal>
+            <Dependent Role="TenantAddress">
+              <PropertyRef Name="TenantAddress_TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenantId">
+          <End Role="TenantDetails" Type="Self.TenantDetails" Multiplicity="0..1" />
+          <End Role="AdminCredentials" Type="Self.AdminCredentials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantDetails">
+              <PropertyRef Name="TenantDetails_Id" />
+            </Principal>
+            <Dependent Role="AdminCredentials">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_AddCred" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Carbon">
+          <Parameter Name="TenantId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="varchar(max)" Mode="In" />
+          <Parameter Name="AddedBy" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_CheckCred" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Carbon">
+          <Parameter Name="TenantId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="TrainingWheelsAdminDbModelStoreContainer">
+          <EntitySet Name="AdminCredentials" EntityType="Self.AdminCredentials" Schema="Carbon" store:Type="Tables" />
+          <EntitySet Name="AdminDetails" EntityType="Self.AdminDetails" Schema="Carbon" store:Type="Tables" />
+          <EntitySet Name="AdminScopes" EntityType="Self.AdminScopes" Schema="Carbon" store:Type="Tables" />
+          <EntitySet Name="TenantAddress" EntityType="Self.TenantAddress" Schema="Carbon" store:Type="Tables" />
+          <EntitySet Name="TenantDetails" EntityType="Self.TenantDetails" Schema="Carbon" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminDetail_AdminScopeId" Association="Self.FK_AdminDetail_AdminScopeId">
+            <End Role="AdminScopes" EntitySet="AdminScopes" />
+            <End Role="AdminDetails" EntitySet="AdminDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenantAddress_TenantId" Association="Self.FK_TenantAddress_TenantId">
+            <End Role="TenantDetails" EntitySet="TenantDetails" />
+            <End Role="TenantAddress" EntitySet="TenantAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenantId" Association="Self.FK_TenantId">
+            <End Role="TenantDetails" EntitySet="TenantDetails" />
+            <End Role="AdminCredentials" EntitySet="AdminCredentials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrainingWheelsAdminDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminCredential">
+          <Key>
+            <PropertyRef Name="AdminCredentialsId" />
+          </Key>
+          <Property Name="AdminCredentialsId" Type="Guid" Nullable="false" />
+          <Property Name="TenantId" Type="Guid" />
+          <Property Name="UserName" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddedBy" Type="Guid" Nullable="false" />
+          <Property Name="AddedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TenantDetail" Relationship="Self.FK_TenantId" FromRole="AdminCredentials" ToRole="TenantDetails" />
+        </EntityType>
+        <EntityType Name="AdminDetail">
+          <Key>
+            <PropertyRef Name="AdminDetail_Id" />
+          </Key>
+          <Property Name="AdminDetail_Id" Type="Guid" Nullable="false" />
+          <Property Name="AdminDetail_AdminScopeId" Type="Guid" Nullable="false" />
+          <Property Name="AdminDetail_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminDetail_Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminDetail_AddedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdminDetail_AddedBy" Type="Guid" Nullable="false" />
+          <Property Name="AdminDetail_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="AdminDetail_UpdatedBy" Type="Guid" />
+          <Property Name="AdminDetail_Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdminScope" Relationship="Self.FK_AdminDetail_AdminScopeId" FromRole="AdminDetails" ToRole="AdminScopes" />
+        </EntityType>
+        <EntityType Name="AdminScope">
+          <Key>
+            <PropertyRef Name="AdminScope_Id" />
+          </Key>
+          <Property Name="AdminScope_Id" Type="Guid" Nullable="false" />
+          <Property Name="AdminScope_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminScope_Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdminScope_AddedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdminScope_AddedBy" Type="Guid" Nullable="false" />
+          <Property Name="AdminScope_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="AdminScope_UpdatedBy" Type="Guid" />
+          <Property Name="AdminScope_Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdminDetails" Relationship="Self.FK_AdminDetail_AdminScopeId" FromRole="AdminScopes" ToRole="AdminDetails" />
+        </EntityType>
+        <EntityType Name="TenantAddress">
+          <Key>
+            <PropertyRef Name="TenantAddress_Id" />
+          </Key>
+          <Property Name="TenantAddress_Id" Type="Guid" Nullable="false" />
+          <Property Name="TenantAddress_TenantId" Type="Guid" Nullable="false" />
+          <Property Name="TenantAddress_CompanyName" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantAddress_DoorNo" Type="Int32" />
+          <Property Name="TenantAddress_StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenantAddress_CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantAddress_CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantAddress_ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantAddress_EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TenantAddress_ContactPersonName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantAddress_Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TenantDetail" Relationship="Self.FK_TenantAddress_TenantId" FromRole="TenantAddress" ToRole="TenantDetails" />
+        </EntityType>
+        <EntityType Name="TenantDetail">
+          <Key>
+            <PropertyRef Name="TenantDetails_Id" />
+          </Key>
+          <Property Name="TenantDetails_Id" Type="Guid" Nullable="false" />
+          <Property Name="TenantDetails_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenantDetails_Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TenantDetails_TenantSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenantDetails_TenantUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenantDetails_AddedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TenantDetails_AddedBy" Type="Guid" Nullable="false" />
+          <Property Name="TenantDetails_UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="TenantDetails_UpdatedBy" Type="Guid" />
+          <Property Name="TenantDetails_Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AdminCredentials" Relationship="Self.FK_TenantId" FromRole="TenantDetails" ToRole="AdminCredentials" />
+          <NavigationProperty Name="TenantAddresses" Relationship="Self.FK_TenantAddress_TenantId" FromRole="TenantDetails" ToRole="TenantAddress" />
+        </EntityType>
+        <Association Name="FK_TenantId">
+          <End Role="TenantDetails" Type="Self.TenantDetail" Multiplicity="0..1" />
+          <End Role="AdminCredentials" Type="Self.AdminCredential" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantDetails">
+              <PropertyRef Name="TenantDetails_Id" />
+            </Principal>
+            <Dependent Role="AdminCredentials">
+              <PropertyRef Name="TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminDetail_AdminScopeId">
+          <End Role="AdminScopes" Type="Self.AdminScope" Multiplicity="1" />
+          <End Role="AdminDetails" Type="Self.AdminDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminScopes">
+              <PropertyRef Name="AdminScope_Id" />
+            </Principal>
+            <Dependent Role="AdminDetails">
+              <PropertyRef Name="AdminDetail_AdminScopeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TenantAddress_TenantId">
+          <End Role="TenantDetails" Type="Self.TenantDetail" Multiplicity="1" />
+          <End Role="TenantAddress" Type="Self.TenantAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TenantDetails">
+              <PropertyRef Name="TenantDetails_Id" />
+            </Principal>
+            <Dependent Role="TenantAddress">
+              <PropertyRef Name="TenantAddress_TenantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrainingWheelsAdminDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminCredentials" EntityType="Self.AdminCredential" />
+          <EntitySet Name="AdminDetails" EntityType="Self.AdminDetail" />
+          <EntitySet Name="AdminScopes" EntityType="Self.AdminScope" />
+          <EntitySet Name="TenantAddresses" EntityType="Self.TenantAddress" />
+          <EntitySet Name="TenantDetails" EntityType="Self.TenantDetail" />
+          <AssociationSet Name="FK_TenantId" Association="Self.FK_TenantId">
+            <End Role="TenantDetails" EntitySet="TenantDetails" />
+            <End Role="AdminCredentials" EntitySet="AdminCredentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminDetail_AdminScopeId" Association="Self.FK_AdminDetail_AdminScopeId">
+            <End Role="AdminScopes" EntitySet="AdminScopes" />
+            <End Role="AdminDetails" EntitySet="AdminDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TenantAddress_TenantId" Association="Self.FK_TenantAddress_TenantId">
+            <End Role="TenantDetails" EntitySet="TenantDetails" />
+            <End Role="TenantAddress" EntitySet="TenantAddresses" />
+          </AssociationSet>
+          <FunctionImport Name="SP_AddCred">
+            <Parameter Name="TenantId" Mode="In" Type="Guid" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="AddedBy" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CheckCred" ReturnType="Collection(String)">
+            <Parameter Name="TenantId" Mode="In" Type="Guid" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrainingWheelsAdminDbModelStoreContainer" CdmEntityContainer="TrainingWheelsAdminDbEntities">
+          <EntitySetMapping Name="AdminCredentials">
+            <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.AdminCredential">
+              <MappingFragment StoreEntitySet="AdminCredentials">
+                <ScalarProperty Name="AdminCredentialsId" ColumnName="AdminCredentialsId" />
+                <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminDetails">
+            <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.AdminDetail">
+              <MappingFragment StoreEntitySet="AdminDetails">
+                <ScalarProperty Name="AdminDetail_Id" ColumnName="AdminDetail_Id" />
+                <ScalarProperty Name="AdminDetail_AdminScopeId" ColumnName="AdminDetail_AdminScopeId" />
+                <ScalarProperty Name="AdminDetail_Name" ColumnName="AdminDetail_Name" />
+                <ScalarProperty Name="AdminDetail_Description" ColumnName="AdminDetail_Description" />
+                <ScalarProperty Name="AdminDetail_AddedOn" ColumnName="AdminDetail_AddedOn" />
+                <ScalarProperty Name="AdminDetail_AddedBy" ColumnName="AdminDetail_AddedBy" />
+                <ScalarProperty Name="AdminDetail_UpdatedOn" ColumnName="AdminDetail_UpdatedOn" />
+                <ScalarProperty Name="AdminDetail_UpdatedBy" ColumnName="AdminDetail_UpdatedBy" />
+                <ScalarProperty Name="AdminDetail_Status" ColumnName="AdminDetail_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminScopes">
+            <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.AdminScope">
+              <MappingFragment StoreEntitySet="AdminScopes">
+                <ScalarProperty Name="AdminScope_Id" ColumnName="AdminScope_Id" />
+                <ScalarProperty Name="AdminScope_Name" ColumnName="AdminScope_Name" />
+                <ScalarProperty Name="AdminScope_Description" ColumnName="AdminScope_Description" />
+                <ScalarProperty Name="AdminScope_AddedOn" ColumnName="AdminScope_AddedOn" />
+                <ScalarProperty Name="AdminScope_AddedBy" ColumnName="AdminScope_AddedBy" />
+                <ScalarProperty Name="AdminScope_UpdatedOn" ColumnName="AdminScope_UpdatedOn" />
+                <ScalarProperty Name="AdminScope_UpdatedBy" ColumnName="AdminScope_UpdatedBy" />
+                <ScalarProperty Name="AdminScope_Status" ColumnName="AdminScope_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TenantAddresses">
+            <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.TenantAddress">
+              <MappingFragment StoreEntitySet="TenantAddress">
+                <ScalarProperty Name="TenantAddress_Id" ColumnName="TenantAddress_Id" />
+                <ScalarProperty Name="TenantAddress_TenantId" ColumnName="TenantAddress_TenantId" />
+                <ScalarProperty Name="TenantAddress_CompanyName" ColumnName="TenantAddress_CompanyName" />
+                <ScalarProperty Name="TenantAddress_DoorNo" ColumnName="TenantAddress_DoorNo" />
+                <ScalarProperty Name="TenantAddress_StreetName" ColumnName="TenantAddress_StreetName" />
+                <ScalarProperty Name="TenantAddress_CityName" ColumnName="TenantAddress_CityName" />
+                <ScalarProperty Name="TenantAddress_CountryName" ColumnName="TenantAddress_CountryName" />
+                <ScalarProperty Name="TenantAddress_ContactNumber" ColumnName="TenantAddress_ContactNumber" />
+                <ScalarProperty Name="TenantAddress_EmailId" ColumnName="TenantAddress_EmailId" />
+                <ScalarProperty Name="TenantAddress_ContactPersonName" ColumnName="TenantAddress_ContactPersonName" />
+                <ScalarProperty Name="TenantAddress_Status" ColumnName="TenantAddress_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TenantDetails">
+            <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.TenantDetail">
+              <MappingFragment StoreEntitySet="TenantDetails">
+                <ScalarProperty Name="TenantDetails_Id" ColumnName="TenantDetails_Id" />
+                <ScalarProperty Name="TenantDetails_Name" ColumnName="TenantDetails_Name" />
+                <ScalarProperty Name="TenantDetails_Description" ColumnName="TenantDetails_Description" />
+                <ScalarProperty Name="TenantDetails_TenantSite" ColumnName="TenantDetails_TenantSite" />
+                <ScalarProperty Name="TenantDetails_TenantUrl" ColumnName="TenantDetails_TenantUrl" />
+                <ScalarProperty Name="TenantDetails_AddedOn" ColumnName="TenantDetails_AddedOn" />
+                <ScalarProperty Name="TenantDetails_AddedBy" ColumnName="TenantDetails_AddedBy" />
+                <ScalarProperty Name="TenantDetails_UpdatedOn" ColumnName="TenantDetails_UpdatedOn" />
+                <ScalarProperty Name="TenantDetails_UpdatedBy" ColumnName="TenantDetails_UpdatedBy" />
+                <ScalarProperty Name="TenantDetails_Status" ColumnName="TenantDetails_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_AddCred" FunctionName="TrainingWheelsAdminDbModel.Store.SP_AddCred" />
+          <FunctionImportMapping FunctionImportName="SP_CheckCred" FunctionName="TrainingWheelsAdminDbModel.Store.SP_CheckCred" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

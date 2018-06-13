@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TrainingWheelsAdminDbModelStoreContainer" CdmEntityContainer="TrainingWheelsAdminDbEntities">
+    <EntitySetMapping Name="AdminCredentials">
+      <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.AdminCredential">
+        <MappingFragment StoreEntitySet="AdminCredentials">
+          <ScalarProperty Name="AdminCredentialsId" ColumnName="AdminCredentialsId" />
+          <ScalarProperty Name="TenantId" ColumnName="TenantId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminDetails">
+      <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.AdminDetail">
+        <MappingFragment StoreEntitySet="AdminDetails">
+          <ScalarProperty Name="AdminDetail_Id" ColumnName="AdminDetail_Id" />
+          <ScalarProperty Name="AdminDetail_AdminScopeId" ColumnName="AdminDetail_AdminScopeId" />
+          <ScalarProperty Name="AdminDetail_Name" ColumnName="AdminDetail_Name" />
+          <ScalarProperty Name="AdminDetail_Description" ColumnName="AdminDetail_Description" />
+          <ScalarProperty Name="AdminDetail_AddedOn" ColumnName="AdminDetail_AddedOn" />
+          <ScalarProperty Name="AdminDetail_AddedBy" ColumnName="AdminDetail_AddedBy" />
+          <ScalarProperty Name="AdminDetail_UpdatedOn" ColumnName="AdminDetail_UpdatedOn" />
+          <ScalarProperty Name="AdminDetail_UpdatedBy" ColumnName="AdminDetail_UpdatedBy" />
+          <ScalarProperty Name="AdminDetail_Status" ColumnName="AdminDetail_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdminScopes">
+      <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.AdminScope">
+        <MappingFragment StoreEntitySet="AdminScopes">
+          <ScalarProperty Name="AdminScope_Id" ColumnName="AdminScope_Id" />
+          <ScalarProperty Name="AdminScope_Name" ColumnName="AdminScope_Name" />
+          <ScalarProperty Name="AdminScope_Description" ColumnName="AdminScope_Description" />
+          <ScalarProperty Name="AdminScope_AddedOn" ColumnName="AdminScope_AddedOn" />
+          <ScalarProperty Name="AdminScope_AddedBy" ColumnName="AdminScope_AddedBy" />
+          <ScalarProperty Name="AdminScope_UpdatedOn" ColumnName="AdminScope_UpdatedOn" />
+          <ScalarProperty Name="AdminScope_UpdatedBy" ColumnName="AdminScope_UpdatedBy" />
+          <ScalarProperty Name="AdminScope_Status" ColumnName="AdminScope_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TenantAddresses">
+      <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.TenantAddress">
+        <MappingFragment StoreEntitySet="TenantAddress">
+          <ScalarProperty Name="TenantAddress_Id" ColumnName="TenantAddress_Id" />
+          <ScalarProperty Name="TenantAddress_TenantId" ColumnName="TenantAddress_TenantId" />
+          <ScalarProperty Name="TenantAddress_CompanyName" ColumnName="TenantAddress_CompanyName" />
+          <ScalarProperty Name="TenantAddress_DoorNo" ColumnName="TenantAddress_DoorNo" />
+          <ScalarProperty Name="TenantAddress_StreetName" ColumnName="TenantAddress_StreetName" />
+          <ScalarProperty Name="TenantAddress_CityName" ColumnName="TenantAddress_CityName" />
+          <ScalarProperty Name="TenantAddress_CountryName" ColumnName="TenantAddress_CountryName" />
+          <ScalarProperty Name="TenantAddress_ContactNumber" ColumnName="TenantAddress_ContactNumber" />
+          <ScalarProperty Name="TenantAddress_EmailId" ColumnName="TenantAddress_EmailId" />
+          <ScalarProperty Name="TenantAddress_ContactPersonName" ColumnName="TenantAddress_ContactPersonName" />
+          <ScalarProperty Name="TenantAddress_Status" ColumnName="TenantAddress_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TenantDetails">
+      <EntityTypeMapping TypeName="TrainingWheelsAdminDbModel.TenantDetail">
+        <MappingFragment StoreEntitySet="TenantDetails">
+          <ScalarProperty Name="TenantDetails_Id" ColumnName="TenantDetails_Id" />
+          <ScalarProperty Name="TenantDetails_Name" ColumnName="TenantDetails_Name" />
+          <ScalarProperty Name="TenantDetails_Description" ColumnName="TenantDetails_Description" />
+          <ScalarProperty Name="TenantDetails_TenantSite" ColumnName="TenantDetails_TenantSite" />
+          <ScalarProperty Name="TenantDetails_TenantUrl" ColumnName="TenantDetails_TenantUrl" />
+          <ScalarProperty Name="TenantDetails_AddedOn" ColumnName="TenantDetails_AddedOn" />
+          <ScalarProperty Name="TenantDetails_AddedBy" ColumnName="TenantDetails_AddedBy" />
+          <ScalarProperty Name="TenantDetails_UpdatedOn" ColumnName="TenantDetails_UpdatedOn" />
+          <ScalarProperty Name="TenantDetails_UpdatedBy" ColumnName="TenantDetails_UpdatedBy" />
+          <ScalarProperty Name="TenantDetails_Status" ColumnName="TenantDetails_Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_AddCred" FunctionName="TrainingWheelsAdminDbModel.Store.SP_AddCred" />
+    <FunctionImportMapping FunctionImportName="SP_CheckCred" FunctionName="TrainingWheelsAdminDbModel.Store.SP_CheckCred" />
+  </EntityContainerMapping>
+</Mapping>
