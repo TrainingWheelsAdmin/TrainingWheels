@@ -14,8 +14,17 @@ namespace TrainingApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            CheckAdminCredentialProxy CheckAdminCredentialProxy = new CheckAdminCredentialProxy(new CheckAdminCredentialService());
-            CheckAdminCredentialProxy.CheckAdminCredential(null, "admin@training.com", "5458AE2DF3A2FFA892291F45FA909FD3");
+            
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            if (string.IsNullOrEmpty(formCollection["CompanyName"].ToString()))
+            {
+                ModelState.AddModelError("companyname", "Please enter Company name");
+            }
+
             return View();
         }
     }
