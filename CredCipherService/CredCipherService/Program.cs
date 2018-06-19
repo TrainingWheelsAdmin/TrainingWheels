@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CredCipherService
 {
-    class Program
+    public class CipherService
     {
         static void Main(string[] args)
         {
@@ -54,6 +54,23 @@ namespace CredCipherService
         {
             bool insertStatus = false;
             return insertStatus;
+        }
+        public static string GetCipherCreds(string Password)
+        {
+            // key and initialization vector (IV).
+            string keyHex = "3EC6C8B454C531762E44364F1CFCD80094827723BF3963D764B77FE73692C6CB";
+            string initVectorHex = "20300E2B612FDFF5E874B54B78760661";
+
+            byte[] key = Enumerable.Range(0, keyHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(keyHex.Substring(s, 2), 16)).ToArray();
+            byte[] IV = Enumerable.Range(0, initVectorHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(initVectorHex.Substring(s, 2), 16)).ToArray();
+
+            // Encrypt the string to an array of bytes.
+            byte[] encrypted = EncryptStringToBytes_Aes(Password, key, IV);
+
+            string result = System.Text.Encoding.UTF8.GetString(encrypted);
+            string hex = BitConverter.ToString(encrypted);
+            hex = BitConverter.ToString(encrypted).Replace("-", string.Empty);
+            return hex;
         }
         static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
         {

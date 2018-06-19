@@ -21,7 +21,7 @@ namespace DAL
             bool result = false;
             TrainingWheelsAdminDbEntities TrainingWheelsEntity = new TrainingWheelsAdminDbEntities();
             //accessing sp using entity framework db entity context.
-            result = bool.TryParse(TrainingWheelsEntity.SP_CheckCred(tenantId, UserName, Password).Select(s=>s.ToString()).FirstOrDefault(),out result);
+            result = Convert.ToBoolean(TrainingWheelsEntity.SP_CheckCred(tenantId, UserName, Password).Select(s=>s.ToString()).FirstOrDefault());
             return result;
         }
     }
