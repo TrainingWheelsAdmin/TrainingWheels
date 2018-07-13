@@ -10,38 +10,38 @@ namespace CredCipherService
 {
     public class CipherService
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {
+                Decrypt();
+                //Console.Write("EncriptionText: ");
+                //string original = Console.ReadLine();
 
-                Console.Write("EncriptionText: ");
-                string original = Console.ReadLine();
+                //// key and initialization vector (IV).
+                //string keyHex = "3EC6C8B454C531762E44364F1CFCD80094827723BF3963D764B77FE73692C6CB";
+                //string initVectorHex = "20300E2B612FDFF5E874B54B78760661";
 
-                // key and initialization vector (IV).
-                string keyHex = "3EC6C8B454C531762E44364F1CFCD80094827723BF3963D764B77FE73692C6CB";
-                string initVectorHex = "20300E2B612FDFF5E874B54B78760661";
+                //byte[] key = Enumerable.Range(0, keyHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(keyHex.Substring(s, 2), 16)).ToArray();
+                //byte[] IV = Enumerable.Range(0, initVectorHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(initVectorHex.Substring(s, 2), 16)).ToArray();
+                //// Encrypt the string to an array of bytes.
+                //byte[] encrypted = EncryptStringToBytes_Aes(original, key, IV);
 
-                byte[] key = Enumerable.Range(0, keyHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(keyHex.Substring(s, 2), 16)).ToArray();
-                byte[] IV = Enumerable.Range(0, initVectorHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(initVectorHex.Substring(s, 2), 16)).ToArray();
-                // Encrypt the string to an array of bytes.
-                byte[] encrypted = EncryptStringToBytes_Aes(original, key, IV);
+                //string result = System.Text.Encoding.UTF8.GetString(encrypted);
+                //string hex = BitConverter.ToString(encrypted);
+                //hex = BitConverter.ToString(encrypted).Replace("-", string.Empty);
+                //// Decrypt the bytes to a string.
+                //byte[] encrypted_duplicate = Enumerable.Range(0, hex.Length)
+                // .Where(x => x % 2 == 0)
+                // .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                // .ToArray();
+                //string roundtrip = DecryptStringFromBytes_Aes(encrypted_duplicate, key, IV);
 
-                string result = System.Text.Encoding.UTF8.GetString(encrypted);
-                string hex = BitConverter.ToString(encrypted);
-                hex = BitConverter.ToString(encrypted).Replace("-", string.Empty);
-                // Decrypt the bytes to a string.
-                byte[] encrypted_duplicate = Enumerable.Range(0, hex.Length)
-                 .Where(x => x % 2 == 0)
-                 .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                 .ToArray();
-                string roundtrip = DecryptStringFromBytes_Aes(encrypted_duplicate, key, IV);
-
-                //Display the original data and the decrypted data.
-                Console.WriteLine("Original:   {0}", original);
-                Console.WriteLine("Round Trip: {0}", roundtrip);
-                Console.WriteLine("CipherText: " + hex);
-                Console.ReadKey();
+                ////Display the original data and the decrypted data.
+                //Console.WriteLine("Original:   {0}", original);
+                //Console.WriteLine("Round Trip: {0}", roundtrip);
+                //Console.WriteLine("CipherText: " + hex);
+                //Console.ReadKey();
 
 
             }
@@ -49,6 +49,26 @@ namespace CredCipherService
             {
                 Console.WriteLine("Error: {0}", e.Message);
             }
+        }
+        public static void Decrypt()
+        {
+            Console.Write("EncriptedHex: ");
+            string hex = Console.ReadLine();
+            hex=hex.Trim();
+            string keyHex = "3EC6C8B454C531762E44364F1CFCD80094827723BF3963D764B77FE73692C6CB";
+            string initVectorHex = "20300E2B612FDFF5E874B54B78760661";
+
+            byte[] key = Enumerable.Range(0, keyHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(keyHex.Substring(s, 2), 16)).ToArray();
+            byte[] IV = Enumerable.Range(0, initVectorHex.Length).Where(w => w % 2 == 0).Select(s => Convert.ToByte(initVectorHex.Substring(s, 2), 16)).ToArray();
+
+            byte[] encrypted_duplicate = Enumerable.Range(0, hex.Length)
+                 .Where(x => x % 2 == 0)
+                 .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                 .ToArray();
+
+            string decipheredValue = DecryptStringFromBytes_Aes(encrypted_duplicate, key, IV);
+            Console.WriteLine(decipheredValue);
+            Console.ReadKey();
         }
         public bool AddAdminCred(string TenantId, string UserName, string Password, string UserId)
         {

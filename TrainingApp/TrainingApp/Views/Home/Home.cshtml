@@ -1,7 +1,42 @@
 ﻿
-@{
-    ViewBag.Title = "Home";
-}
 
-<h2>Home</h2>
+    <script type="text/javascript">
+        $(function () {
+            var displayName = prompt('Enter your name:', '');
+            var IWannaChat = $.connection.myChatHub;
+            console.log(IWannaChat);
+            IWannaChat.client.addNewMessageToPage = function (name,message) {
+                $('#listMessages').append('<li><strong>' + htmlEncode(name)
+                    + '</strong>: ' + htmlEncode(message) + '</li>');
+            };
 
+            $("#SendMessage").click(function () {
+                
+                IWannaChat.server.send(displayName,$('#txtMessage').val());
+                $('#txtMessage').val("");
+            });
+
+            $.connection.hub.start().done(function () {
+                console.log("done");
+            }).fail(function (e) {
+                console.log(e);
+            });
+            $("#txtMessage").keyup(function (e) {
+                if (e.keyCode == 13)
+                {
+                    IWannaChat.server.send(displayName,$('#txtMessage').val());
+                    $('#txtMessage').val("");
+                }
+            });
+        });
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+
+    <div>
+        <input type="text" id="txtMessage" />
+        <input type="button" id="SendMessage" value="broadcast" />
+        <ul id="listMessages"></ul>
+    </div>

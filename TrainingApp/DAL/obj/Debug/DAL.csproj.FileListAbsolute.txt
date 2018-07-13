@@ -20,3 +20,15 @@ C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\D
 C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\DAL\obj\Debug\DAL.pdb
 C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\DAL\bin\Debug\IDAL.exe
 C:\Users\saravanan.chinna\Desktop\TrainingScheckuot\TrainingWheels\TrainingApp\DAL\bin\Debug\IDAL.pdb
+D:\TrainingApp\DAL\bin\Debug\DAL.exe.config
+D:\TrainingApp\DAL\bin\Debug\DAL.exe
+D:\TrainingApp\DAL\bin\Debug\DAL.pdb
+D:\TrainingApp\DAL\bin\Debug\EntityFramework.dll
+D:\TrainingApp\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\TrainingApp\DAL\bin\Debug\IDAL.exe
+D:\TrainingApp\DAL\bin\Debug\IDAL.pdb
+D:\TrainingApp\DAL\bin\Debug\EntityFramework.xml
+D:\TrainingApp\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\TrainingApp\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\TrainingApp\DAL\obj\Debug\DAL.exe
+D:\TrainingApp\DAL\obj\Debug\DAL.pdb

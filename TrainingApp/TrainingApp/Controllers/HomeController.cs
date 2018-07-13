@@ -8,7 +8,9 @@ using Proxy;
 using Service;
 using ServiceContracts;
 using CredCipherService;
+using Microsoft.AspNet.SignalR.Hubs;
 using System.Web.Security;
+using Microsoft.AspNet.SignalR;
 
 namespace TrainingApp.Controllers
 {
@@ -79,7 +81,7 @@ namespace TrainingApp.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("AuthenticationError", "invalid username or password");
+                        ModelState.AddModelError("AuthenticationError", "invalid username and/or password");
                     }
                 }
                 
@@ -109,6 +111,8 @@ namespace TrainingApp.Controllers
             {
                 return RedirectToAction("Login");
             }
+
+
             
             return View();
         }
